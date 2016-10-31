@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : MonoBehaviour
+{
+    public float fBulletStrength;
+    public GameObject goExplosion;
 
-	// Use this for initialization
-	void Start () {
-        Destroy(this.gameObject, 1.5f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void SpawnExplosion()
+    {
+        GameObject goExpl = Instantiate(goExplosion, transform.position, Quaternion.identity) as GameObject;
+        Destroy(goExpl, 2.0f);
+        Destroy(this.gameObject);
+    }
+
+    public IEnumerator BulletAliveTime(float fWaitingTime)
+    {
+        yield return new WaitForSeconds(fWaitingTime);
+        SpawnExplosion();
+        Destroy(this.gameObject);
+    }
+
 }

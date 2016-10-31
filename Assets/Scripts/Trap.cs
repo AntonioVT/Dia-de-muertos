@@ -6,11 +6,11 @@ public class Trap : MonoBehaviour {
     public float fInterval = 0.5f;
     private float fNextInterval = 0.0f;
 
-    private GameManager _GV;
+    private GameManager gameManager;
 
     void Start()
     {
-        _GV = GameManager.Instance;
+        gameManager = GameManager.Instance;
     }
 
 
@@ -22,7 +22,7 @@ public class Trap : MonoBehaviour {
             {
                 fNextInterval = Time.time + fInterval;
                 int iDamage = Random.Range(1, 7);
-                _GV.DamagePlayer(iDamage);
+                gameManager.DamagePlayer(iDamage);
             }
             
         }
